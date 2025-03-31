@@ -80,3 +80,5 @@ try:
     if a <= 0:
         raise ValueError
 check_age(input("Введите возраст (натуральное число):"))
+
+print("Тестирую комит и пуш")
