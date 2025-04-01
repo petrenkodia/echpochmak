@@ -210,6 +210,9 @@ while True:
         elif guess == 666:
             print("Покасики")
             break
+        elif guess == 11:
+            print("АДИНАДЦАТЬ!!! (круто, но пока не угадал)")
+            continue
         elif guess < number:
             print("Бери выше")
         elif guess > number:
