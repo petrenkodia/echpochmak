@@ -1,5 +1,8 @@
+import logging
+import random
+
 print('5.1 Исключения')
-"""
+
 print("ЗАДАНИЕ 1")
 def delenie():
     while True:  # Бесконечный цикл для повторного ввода в случае ошибки
@@ -103,18 +106,120 @@ except FileNotFoundError:
     print("Файл не найден!")
 except Exception as e:
     print("Неизвестная ошибка:", e)
-"""
 
-""" Режимы открытия файлов:
-'r'	Чтение (по умолчанию) //вроде должен просто читать, если не указано иное
-'w'	Запись (перезаписывает файл)
-'a'	Дозапись в конец файла
-'x'	Создание файла (ошибка, если уже существует)
-'b'	Бинарный режим (например, 'rb' для чтения изображений)
-'t'	Текстовый режим (по умолчанию)
-'+'	Чтение + запись (например, 'r+')"""
+#Режимы открытия файлов:
+#'r'	Чтение (по умолчанию) //вроде должен просто читать, если не указано иное
+#'w'	Запись (перезаписывает файл)
+#'a'	Дозапись в конец файла
+#'x'	Создание файла (ошибка, если уже существует)
+#'b'	Бинарный режим (например, 'rb' для чтения изображений)
+#'t'	Текстовый режим (по умолчанию)
+#'+'	Чтение + запись (например, 'r+')
 
 print("ЗАДАНИЕ 7")
+class InvalidPasswordError(Exception):
+    pass
+
+def validate_password(password):
+    if len(password) < 8:
+        raise InvalidPasswordError("Пароль должен содержать 8 или более символов")
+    
+    #digits = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'}
+    #if not digits.intersection(password):
+        #raise InvalidPasswordError("Пароль должен содержать цифры!")
+    
+    has_digit = False
+    for char in password:
+        if char.isdigit():
+            has_digit = True
+            break
+    if not has_digit: # Только если has_digit осталось "False"
+        raise InvalidPasswordError("Пароль должен содержать цифры!")
+
+try:
+    validate_password(input("Введите пароль: "))
+    print("Пароль принят")
+except InvalidPasswordError as e:
+    print("Ошибка пароля:", e)
+except Exception as e:
+    print(f"Другая ошибка: {e}")
+
+print("ЗАДАНИЕ 8")
+class InvalidOperatorError(Exception):
+    pass
+
+def calc(a,oper,b):
+    res = 0.00
+    if oper == "+":
+        res = a + b
+    elif oper == "-":
+        res = a - b
+    elif oper == "*":
+        res = a * b
+    elif oper == "^":
+        return a ** b
+    elif oper == "/":
+        if b == 0:
+            raise ZeroDivisionError("Деление на ноль НЕВАЗМОЖНА!!!")
+        res = a / b
+    else:
+        raise InvalidOperatorError("Введен не один из предложенных операторов")
+    return (res)
+
+try:
+    a = float(input("Введите первое число: "))
+    oper = input("Введите оператор (+, -, *, / или ^): ")
+    b = float(input("Введите второе число: "))
+    print("Результат:", calc(a,oper,b))
+
+except InvalidOperatorError as e:
+    print("Ошибка оператора:", e)
+except ZeroDivisionError as e:
+    print("Ошибка делителя: ", e)
+except ValueError:
+    print("Ошибка значения: введите числа корректно (например, 5 или 3.14)")
+except Exception as e:
+    print(f"Другая ошибка: {e}")
+
+print("ЗАДАНИЕ 9")
+
+logging.basicConfig(
+    filename='errors.log',  # Файл, куда записываются ошибки
+    level=logging.ERROR,    # Записываем только ошибки (есть разные уровни логов - INFO или WARNING)
+    format='%(asctime)s - %(message)s',  # Формат записи (ВОТ ТУТ СИНТАКСИС Я НЕ ОЧЕНЬ ПОНЯЛА)
+    encoding='utf-8'       # Чтобы русский текст нормально записывался
+)
+
+try:
+    x = 10 / 0 # Код, вызывающий ошибку. И второй вариант в int()
+    #num = int("stroka")
+except Exception as e:
+    logging.error(f"Произошла ошибка: {e}")  # Запись в файл
+    print("Произошла ошибка, см. лог-файл")  # Вывод в консоль
+
+print("ЗАДАНИЕ 10")
+print("ИГРА")
+number = random.randint(1, 100)
+
+while True:
+    try:
+        guess = int(input("Введите целое число от 1 до 100: "))
+        if guess == number:
+            print("Вы просто медиум-экстрасекс!")
+            break
+        elif guess == 666:
+            print("Покасики")
+            break
+        elif guess < number:
+            print("Бери выше")
+        elif guess > number:
+            print("Перебрал")
+        else:
+            print("Шо то странное ты загадал")
+    except ValueError as ve:
+        print("Ошибка значения:", ve)
+    except Exception as e:
+        print(f"Другая ошибка: {e}")
 
 
 
@@ -126,9 +231,4 @@ print("ЗАДАНИЕ 7")
 
 
 
-
-
-
-
-#print("Тестирую комит и пуш")
 
