@@ -15,3 +15,5 @@ import mymodule as mm
 print(mm.hello("Аннушка"))
 
 print("Ура! Мой первый модуль!")
+
+pyp
