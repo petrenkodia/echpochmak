@@ -17,7 +17,7 @@ url = 'https://randewoo.ru/category/aroma-box?page=1'
 response = requests.get(url)
 soup = BeautifulSoup(response.content, 'html.parser')
 
-# Парсим все товары!!!
+# Парсим все товары!
 products = soup.select('li.products__item')
 
 for i, product in enumerate(products, 1):
