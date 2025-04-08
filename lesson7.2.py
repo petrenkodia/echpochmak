@@ -17,15 +17,16 @@ url = 'https://randewoo.ru/category/aroma-box?page=1'
 response = requests.get(url)
 soup = BeautifulSoup(response.content, 'html.parser')
 
-# Парсим все товары
+# Парсим все товары!
 products = soup.select('li.products__item')
 
 for i, product in enumerate(products, 1):
 
-    # Название (из атрибута data-name)
-    name = product['data-name']
+    # Название и тип
+    name = product['data-name'] [:50]
+    category = product.get('data-category', 'Отсутствует')[:25] # не у всех есть
 
     # Текущая цена (из тега <b itemprop="price">)
     price = product.select_one('b[itemprop="price"]').text.strip()
 
-    print(f"{i}. {name} | Цена: {price} руб.")
+    print(f"{i:>3}. {name:<50} | Категория: {category:<30} | Цена: {price:>5}")
