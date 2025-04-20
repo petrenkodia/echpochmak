@@ -1,6 +1,7 @@
-# Домашка, тоже только 1 страница, буду доделывать
+# Домашка, тоже только 1 страница
 
-"""import requests
+""" #Тут я делала парсинг сайта Леди Баг, но там 1 страница и слишком просто - только название серий есть
+import requests
 from bs4 import BeautifulSoup
 
 url = 'https://miraculousledybug.ru/ep/s6/'
