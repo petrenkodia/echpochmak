@@ -1,4 +1,4 @@
-# Домашка, тоже только 1 страница, буду доделывать
+# Домашка, но только 1 страница
 
 """import requests
 from bs4 import BeautifulSoup
