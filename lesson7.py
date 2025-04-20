@@ -1,10 +1,13 @@
-#Мой код с занятия (только 1 страница)
+#Мой код с занятия (только 1 страница) ТО МЭЙН ДВАААА
 import requests
 from bs4 import BeautifulSoup
 
 
 url = "https://books.toscrape.com/"
-books = [] # почитать про http запросы!!!
+books = [] # почитать про http запросы!!!!!!
+
+
+
 responce = requests.get(url)
 
 soup = BeautifulSoup(responce.content, features="html.parser")
